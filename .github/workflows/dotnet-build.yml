@@ -1,0 +1,16 @@
+name: Add and build dotnet wepapp
+on:
+  push:
+  schedule:
+    - cron: '0 * * * *'  # Executa a cada hora  
+    
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: dotnet restore and build
+        run: |
+          dotnet restore **/*.csproj
+          dotnet build **/*.csproj --no-restore
